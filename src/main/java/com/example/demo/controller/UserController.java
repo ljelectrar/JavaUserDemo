@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.PatchUserRequest;
@@ -22,6 +23,17 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	
+	@GetMapping("/test/{id}/{name}")
+	public String test(@PathVariable int id, @PathVariable String name) {
+		return id + " " + name;
+	}
+	
+	//http://localhost:8080/test?id=2&name=Ana
+	@GetMapping("/test}")
+	public void test2(@RequestParam("id") int id, @RequestParam("name" String name) {
+		System.out.println(id + " " + name);
+	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id")  String userId) {
