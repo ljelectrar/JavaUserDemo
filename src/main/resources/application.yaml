@@ -3,10 +3,10 @@ spring:
     deserialization:
       fail-on-unknown-properties: true 
 
-datasource:
-  url: "jdbc:mysql://localhost:3306/ljelectrar"
-  username: 
-  password: 
+  datasource:
+    url: "jdbc:mysql://localhost:3306/ljelectrar"
+    username: 
+    password: 
   
   jpa:
     show_sql: true

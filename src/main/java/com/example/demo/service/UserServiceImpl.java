@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.PatchUserRequest;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -17,12 +19,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getUsers() {
-		return repository.getUsers();
+		return repository.findAll();
 	}
 
 	@Override
-	public User getUser(String userId) {
-		return repository.getUsers().get(Integer.valueOf(userId));
+	public User getUser(Long id) {
+		return repository.findUserById(id);
 	}
 
 	@Override
@@ -31,14 +33,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(Integer id) {
-		repository.delete(id);
+	public void delete(Long id) {
+		repository.deleteUserById(id);
 	}
 
 	@Override
-	public void update(String userId, PatchUserRequest request) {
-		User user = repository.getUsers().get(Integer.valueOf(userId));
+	public void update(User user, PatchUserRequest request) {
+		updateUser(user, request);
+		repository.save(user);
+	}
 
+	private void updateUser(User user, PatchUserRequest request) {
 		// update the values that are present in the request
 		if (request.getFirstName() != null) {
 			user.setFirstName(request.getFirstName());
@@ -51,10 +56,6 @@ public class UserServiceImpl implements UserService {
 		if (request.getEmail() != null) {
 			user.setEmail(request.getEmail());
 		}
-		
-		// Save the user 
-		repository.update(userId, user);
-
 	}
 
 }

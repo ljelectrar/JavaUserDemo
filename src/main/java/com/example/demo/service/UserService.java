@@ -7,8 +7,8 @@ import com.example.demo.model.User;
 
 public interface UserService {
 	public List<User> getUsers();
-	public User getUser(String userId);
+	public User getUser(Long id);
 	public void create(User user);
-	public void delete(Integer id);
-	public void update(String userId, PatchUserRequest request);
+	public void delete(Long id);
+	public void update(User user, PatchUserRequest request);
 }
