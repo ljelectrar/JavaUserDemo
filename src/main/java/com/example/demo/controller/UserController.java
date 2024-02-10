@@ -31,7 +31,7 @@ public class UserController {
 	
 	@GetMapping("/test")
 	public Test test() {
-		return new Test("First name", "Last name", "email@email.com");
+		return new Test(null, "Last name", "email@email.com");
 	}
 
 	@GetMapping("/test")
