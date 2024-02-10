@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,12 +17,28 @@ public class Test {
 	@JsonProperty("last_name")
 	private String lastName;
 	private String email;
+	
+	
+	private Date date;
 
-	public Test(String firstName, String lastName, String email) {
+	public Test(String firstName, String lastName, String email, Date date) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.date = date;
 	}
+	
+	public Date getDate() {
+		return date;
+	}
+
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+
 
 	public Long getId() {
 		return id;

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,14 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@GetMapping("/test")
-	public Test test() {
-		return new Test(null, "Last name", "email@email.com");
+	@GetMapping("/test2")
+	public Test test2() {
+		return new Test("first", "last", "email", new Date());
+	}
+	
+	@PostMapping("/test")
+	public void test(@RequestBody Test test) {
+		System.out.println(test.getDate());
 	}
 
 	@GetMapping("/test")
