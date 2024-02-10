@@ -8,7 +8,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +19,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 
 @Entity
-@JsonInclude(Include.NON_ABSENT)
+@JsonInclude(Include.NON_NULL)
 public class User {
 
 	@Id
@@ -33,6 +36,14 @@ public class User {
 	
 	@Column(length=20)
 	private String email;
+	
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name = "gender", column = @Column(name = "user_gender"))
+		@AttributeOverride(name = "phone", column = @Column(name = "user_phone"))
+
+	})
+	private PersonContact personContact;
 
 	@Transient
 	@JsonIgnore
