@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +19,7 @@ public class Test {
 	private String lastName;
 	private String email;
 	
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
 	private Date date;
 
 	public Test(String firstName, String lastName, String email, Date date) {
