@@ -1,7 +1,12 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = {"id", "email"})
 public class Test {
 
+	//@JsonIgnore
 	private Long id;
 	private String firstName;
 	private String lastName;
