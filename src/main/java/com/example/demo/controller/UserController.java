@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.PatchUserRequest;
+import com.example.demo.model.Test;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 
@@ -26,11 +28,18 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
+	
+	@GetMapping("/test")
+	public Test test() {
+		return new Test("First name", "Last name", "email@email.com");
+	}
 
 	@GetMapping("/test")
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public ResponseEntity<String> test(@RequestHeader(value = "number1", defaultValue="100") int num) {
-		return new ResponseEntity<>("This is a String" + num, HttpStatus.OK);
+	public ResponseEntity<Integer> test(@RequestHeader(value = "number1", defaultValue="100") int num) {
+		HttpHeaders header = new HttpHeaders();
+		header.add("Own-prop", "Value");
+		return new ResponseEntity<>(num, header, HttpStatus.ACCEPTED);
 	}
 	
 	/*
@@ -81,7 +90,7 @@ public class UserController {
 	}
 
 	@GetMapping("/users")
-	public List<User> sayHello() {
+	public List<User> getUsers() {
 		return service.getUsers();
 	}
 
