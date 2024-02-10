@@ -1,20 +1,49 @@
 package com.example.demo.model;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+
+@Entity
 @JsonInclude(Include.NON_ABSENT)
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Column(length = 30)
+	@JsonProperty("first_name")
 	private String firstName;
+	
+	@Column(length=30)
+	@JsonProperty("last_name")
 	private String lastName;
+	
+	@Column(length=20)
 	private String email;
 
-	public User(String firstName, String lastName, String email) {
+	@Transient
+	@JsonIgnore
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	private Date date;
+	
+	public User(String firstName, String lastName, String email, Date date) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.date = date;
 	}
 
 	public Long getId() {
