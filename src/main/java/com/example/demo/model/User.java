@@ -42,7 +42,7 @@ public class User {
 
 	@Column(length = 20)
 	//TODO: use regular expression to validate the email adress
-	@Email(message = "The email must be in a valid format")  // email format (email@email.com) validation from Spring validation library
+	//@Email(message = "The email must be in a valid format")  // email format (email@email.com) validation from Spring validation library
 	private String email;
 
 	@JsonIgnore
