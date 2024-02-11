@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.demo.constants.AppConstants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,6 +20,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @JsonInclude(Include.NON_NULL)
@@ -43,6 +45,7 @@ public class User {
 	@Column(length = 20)
 	//TODO: use regular expression to validate the email adress
 	//@Email(message = "The email must be in a valid format")  // email format (email@email.com) validation from Spring validation library
+	@Pattern(regexp = AppConstants.EMAIL_REGEXPR, message = "Email must be valid")
 	private String email;
 
 	@JsonIgnore

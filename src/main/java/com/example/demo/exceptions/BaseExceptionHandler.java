@@ -49,4 +49,12 @@ public class BaseExceptionHandler{
 		ErrorMessage message = new ErrorMessage(400, "Bad Request");
 		return new ResponseEntity<ErrorMessage>(message, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(IllegalArgumentException.class)
+	//@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	public ResponseEntity<ErrorMessage> handleIllegalException(IllegalArgumentException e) {
+
+		ErrorMessage message = new ErrorMessage(400, e.getMessage());
+		return new ResponseEntity<ErrorMessage>(message, HttpStatus.BAD_REQUEST);
+	}
 }
