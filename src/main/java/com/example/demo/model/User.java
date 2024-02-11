@@ -10,14 +10,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @JsonInclude(Include.NON_NULL)
@@ -26,16 +27,21 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
-
-	@Column(length = 30)
+	
 	@JsonProperty("first_name")
+	//@NotNull(message = "The first name can not be null")
+	//@NotBlank(message = "The first name can not be blank")
+	@NotEmpty(message = "The first name can not be null or empty")
+	@Column (length = 50)
 	private String firstName;
 
-	@Column(length = 30)
 	@JsonProperty("last_name")
+	@NotEmpty(message = "The last name can not be null or empty")
+	@Column(length = 30)
 	private String lastName;
 
 	@Column(length = 20)
+	@Email // email format (email@email.com) validation from Spring validation library
 	private String email;
 
 	@JsonIgnore
