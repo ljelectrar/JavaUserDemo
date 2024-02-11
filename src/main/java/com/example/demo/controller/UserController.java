@@ -77,7 +77,8 @@ public class UserController {
 		return user;
 	}
 	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ExceptionHandler({MethodArgumentNotValidException.class, 
+		IllegalArgumentException.class})
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public String handleNotValidException() {
 		return "this is the method that handles the exception";
