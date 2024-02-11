@@ -41,7 +41,8 @@ public class User {
 	private String lastName;
 
 	@Column(length = 20)
-	@Email // email format (email@email.com) validation from Spring validation library
+	//TODO: use regular expression to validate the email adress
+	@Email(message = "The email must be in a valid format")  // email format (email@email.com) validation from Spring validation library
 	private String email;
 
 	@JsonIgnore
